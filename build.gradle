@@ -29,6 +29,7 @@ task runCompass() << {
 task watchCompass() << {
     //project.gemHome('/Users/koenongena/java/compass/')
     project.useGem('sass')
+    project.useGem('fssm')
     project.useGem('chunky_png')
     project.useGem('compass')
     def compassBin = project.gemScript('compass')
