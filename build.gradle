@@ -14,8 +14,14 @@ buildscript {
 }
 
 task runCompass() << {
-project.useGem('compass')
-def compassBin = project.gemScript('compass')
-project.runJRuby("$compassBin compile ${build.project}/src/main/sass")
+    logger.info "pqsdjfsdnf"
+    //project.gemHome('/Users/koenongena/java/compass/')
+    project.useGem('sass')
+    project.useGem('chunky_png')
+    project.useGem('compass')
+    def compassBin = project.gemScript('compass')
+    def cmd = "$compassBin compile /Users/koenongena/projects/gradle-compass-sample/src/main/compass"
+    logger.info("Run: $cmd")
+    project.runJRuby(cmd)
 
 }
