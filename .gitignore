@@ -2,3 +2,4 @@
 .idea/
 .gradle/
 build/
+src/main/compass/.sass-cache/

@@ -26,6 +26,19 @@ task runCompass() << {
 
 }
 
+task watchCompass() << {
+    //project.gemHome('/Users/koenongena/java/compass/')
+    project.useGem('sass')
+    project.useGem('chunky_png')
+    project.useGem('compass')
+    def compassBin = project.gemScript('compass')
+    def compassDir = new File('./src/main/compass')
+    def cmd = "$compassBin watch ${compassDir.absolutePath}"
+    logger.info("Run compass command: $cmd")
+    project.runJRuby(cmd)
+
+}
+
 task installCompass() << {
     //project.gemHome('/Users/koenongena/java/compass/')
     project.useGem('sass')
