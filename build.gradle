@@ -1,4 +1,5 @@
 apply plugin: com.smokejumperit.gradle.RunJRubyPlugin
+apply plugin: 'jetty'
 
 buildscript {
     repositories {
@@ -27,13 +28,13 @@ task runCompass() << {
 }
 
 task watchCompass() << {
-    //project.gemHome('/Users/koenongena/java/compass/')
+    project.gemHome('./build/gems/')
     project.useGem('sass')
     project.useGem('fssm')
     project.useGem('chunky_png')
     project.useGem('compass')
     def compassBin = project.gemScript('compass')
-    def compassDir = new File('./src/main/compass')
+    def compassDir = new File('./src/main/webapp/WEB-INF/compass')
     def cmd = "$compassBin watch ${compassDir.absolutePath}"
     logger.info("Run compass command: $cmd")
     project.runJRuby(cmd)
@@ -52,3 +53,12 @@ task installCompass() << {
     project.runJRuby(cmd)
 
 }
+
+
+
+task jettyAsDaemon(type: org.gradle.api.plugins.jetty.JettyRun) {
+    daemon = true
+    // more configuration to specify each jetty to use different env...
+}
+
+watchCompass.dependsOn jettyAsDaemon
